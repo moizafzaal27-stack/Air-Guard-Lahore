@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071522" />
+  <title>AirGuard Lahore | Smog Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">A</span><span>airguard<span class="brand-light">.lahore</span></span></a>
+    <nav><a class="active" href="#overview">Overview</a><a href="#forecast">AI Forecast</a><a href="#guidance">Health Guardian</a></nav>
+    <div class="top-actions"><span class="live-dot"></span><span>LIVE DATA</span><button id="refreshBtn" class="refresh-btn">↻ Refresh</button></div>
+  </header>
+
+  <main class="shell">
+    <section class="hero" id="overview">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-line"></span> LAHORE AIR INTELLIGENCE <span class="date-pill" id="todayLabel">LIVE MONITORING</span></div>
+        <h1>Know the air.<br><span>Breathe smarter.</span></h1>
+        <p class="hero-copy">Real-time air quality, machine-learning insights and practical protection guidance for Lahore and Pakistan.</p>
+        <div class="hero-meta"><span class="live-dot"></span><span id="updatedText">Connecting to live data…</span><span class="meta-separator">•</span><span>Updates every 10 minutes</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="planet"><div class="planet-glow"></div><div class="planet-land"></div></div>
+        <div class="floating-tag tag-a"><span class="tag-dot"></span> LIVE MONITORING</div>
+        <div class="floating-tag tag-b">✳ &nbsp; AI INSIGHTS</div>
+      </div>
+    </section>
+
+    <section class="section-heading"><div><div class="eyebrow">01 / CITY SNAPSHOT</div><h2>Pakistan air quality</h2></div><div class="unit-note">US AQI · Lower is better</div></section>
+    <div id="cityGrid" class="city-grid"><div class="loading-card">Loading live city readings…</div></div>
+
+    <section class="main-grid">
+      <article class="panel focus-panel">
+        <div class="panel-top"><div><div class="eyebrow">LAHORE · LIVE CONDITIONS</div><h2>Today's air report</h2></div><span class="status-chip" id="lahoreStatus">Loading</span></div>
+        <div class="aqi-layout">
+          <div class="aqi-number-wrap"><div class="aqi-number" id="mainAqi">--</div><div class="aqi-caption">US AIR QUALITY INDEX</div><div class="aqi-description" id="aqiDescription">Fetching current conditions</div></div>
+          <div class="aqi-meter"><div class="meter-ring"><div class="meter-inner"><span>PM2.5</span><strong id="mainPm">--</strong><small>µg/m³</small></div></div><div class="meter-foot">Fine particulate matter</div></div>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><span class="metric-icon">◉</span><div><small>PM10</small><strong id="pm10">--</strong><em>µg/m³</em></div></div>
+          <div class="metric"><span class="metric-icon">⌁</span><div><small>Temperature</small><strong id="temp">--</strong><em>°C</em></div></div>
+          <div class="metric"><span class="metric-icon">◌</span><div><small>Humidity</small><strong id="humidity">--</strong><em>%</em></div></div>
+          <div class="metric"><span class="metric-icon">≋</span><div><small>Wind speed</small><strong id="wind">--</strong><em>km/h</em></div></div>
+        </div>
+      </article>
+
+      <article class="panel insight-panel" id="forecast">
+        <div class="panel-top"><div><div class="eyebrow">02 / MACHINE LEARNING</div><h2>AI next-hour outlook</h2></div><span class="ai-chip">✦ RANDOM FOREST</span></div>
+        <div id="predictionContent" class="prediction-content"><div class="loading-card">Training model on recent hourly data…</div></div>
+        <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+        <p class="fine-print">Experimental estimate trained on the latest 7 days of Open-Meteo modelled hourly data. Not an official forecast.</p>
+      </article>
+    </section>
+
+    <section class="section-heading guidance-heading" id="guidance"><div><div class="eyebrow">03 / PERSONAL PROTECTION</div><h2>Your health guardian</h2></div><div class="unit-note">Guidance based on live readings</div></section>
+    <section class="guidance-grid">
+      <div class="panel advice-panel"><div class="panel-top"><div><div class="eyebrow">SMART RECOMMENDATIONS</div><h2>What should you do?</h2></div><span class="spark">✳</span></div><div id="adviceList" class="advice-list"><div class="loading-card">Preparing recommendations…</div></div></div>
+      <div class="panel assistant-panel"><div class="panel-top"><div><div class="eyebrow">AIRGUARD AI ASSISTANT</div><h2>Ask about your air</h2></div><span class="assistant-icon">✦</span></div>
+        <p class="assistant-intro">Get simple answers using the latest Lahore air-quality reading. English and Roman Urdu supported.</p>
+        <div class="suggestions"><button class="suggestion">Is it safe to exercise?</button><button class="suggestion">Should children play outside?</button><button class="suggestion">When should I open windows?</button></div>
+        <div id="chatMessages" class="chat-messages"><div class="chat-bubble bot">Assalam-o-Alaikum! Ask me about masks, outdoor activities, children, or ventilation.</div></div>
+        <form id="chatForm" class="chat-form"><input id="chatInput" placeholder="Ask your air-quality question…" autocomplete="off"><button aria-label="Send message">➤</button></form>
+      </div>
+    </section>
+    <section class="source-strip"><div><span class="source-icon">ⓘ</span><div><strong>Transparent data. Clear decisions.</strong><p>Live estimates are fetched from Open-Meteo. Modelled data may differ from official ground-monitor readings.</p></div></div><div class="source-links"><a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noreferrer">Air quality API ↗</a><a href="https://open-meteo.com/en/docs" target="_blank" rel="noreferrer">Weather API ↗</a></div></section>
+    <footer><a class="brand" href="#"><span class="brand-mark">A</span><span>airguard<span class="brand-light">.lahore</span></span></a><span>Built for CodeBlue Lahore — Hack 4 Clean Air</span><span>Stay aware. Breathe smarter.</span></footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
